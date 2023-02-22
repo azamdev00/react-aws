@@ -1,6 +1,5 @@
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
 
 name: Deploy to Amazon ECS
 
@@ -69,6 +68,7 @@ jobs:
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
 
-      - name: Cleanup Docker images
-        run: |
-          docker image ls "${{ env.ECR_REPOSITORY }}" -q | xargs -r docker image prune -f
+      - uses: LeiaInc/devops-delete-old-aws-ecr-images@v1
+        with:
+          repo-name: ${{ env.ECR_REPOSITORY}}
+          qtd-images: 1
