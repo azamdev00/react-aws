@@ -67,8 +67,3 @@ jobs:
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
-
-      - uses: LeiaInc/devops-delete-old-aws-ecr-images@v1
-        with:
-          repo-name: ${{ env.ECR_REPOSITORY}}
-          qtd-images: 1
